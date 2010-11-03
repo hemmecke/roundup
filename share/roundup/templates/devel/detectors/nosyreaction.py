@@ -1,4 +1,24 @@
-import sets
+#
+# Copyright (c) 2001 Bizar Software Pty Ltd (http://www.bizarsoftware.com.au/)
+# This module is free software, and you may redistribute it and/or modify
+# under the same terms as Python, so long as this copyright message and
+# disclaimer are retained in their original form.
+#
+# IN NO EVENT SHALL BIZAR SOFTWARE PTY LTD BE LIABLE TO ANY PARTY FOR
+# DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING
+# OUT OF THE USE OF THIS CODE, EVEN IF THE AUTHOR HAS BEEN ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+#
+# BIZAR SOFTWARE PTY LTD SPECIFICALLY DISCLAIMS ANY WARRANTIES, INCLUDING,
+# BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE.  THE CODE PROVIDED HEREUNDER IS ON AN "AS IS"
+# BASIS, AND THERE IS NO OBLIGATION WHATSOEVER TO PROVIDE MAINTENANCE,
+# SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
+# 
+#$Id: nosyreaction.py,v 1.4 2005-04-04 08:47:14 richard Exp $
+
+# Python 2.3 ... 2.6 compatibility:
+from roundup.anypy.sets_ import set
 
 from roundup import roundupdb, hyperdb
 
@@ -48,7 +68,7 @@ def updatenosy(db, cl, nodeid, newvalues):
     '''Update the nosy list for changes to the assignedto
     '''
     # nodeid will be None if this is a new node
-    current_nosy = sets.Set()
+    current_nosy = set()
     if nodeid is None:
         ok = ('new', 'yes')
     else:
@@ -68,7 +88,7 @@ def updatenosy(db, cl, nodeid, newvalues):
                 continue
             current_nosy.add(value)
 
-    new_nosy = sets.Set(current_nosy)
+    new_nosy = set(current_nosy)
 
     # add assignedto(s) to the nosy list
     if newvalues.has_key('assignedto') and newvalues['assignedto'] is not None:
